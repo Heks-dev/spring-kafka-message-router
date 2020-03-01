@@ -1,0 +1,44 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+group 'com.whaleapp.kafka'
+version '2.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                'Implementation-Version': project.version)
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/whaleappltd/spring-kafka-message-router"
+            credentials {
+                username = project.findProperty("github.username")
+                password = project.findProperty("github.token")
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+dependencies {
+    implementation group: 'org.springframework.kafka', name: 'spring-kafka', version: '2.3.5.RELEASE'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.2'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
