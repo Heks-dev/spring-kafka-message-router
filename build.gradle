@@ -23,7 +23,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = "https://maven.pkg.github.com/whaleappltd/spring-kafka-message-router"
+            url = "https://maven.pkg.github.com/Heks-dev/spring-kafka-message-route"
             credentials {
                 username = project.findProperty("github.username")
                 password = project.findProperty("github.token")
